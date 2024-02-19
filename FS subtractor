@@ -1,0 +1,64 @@
+#FULL SUBTRACTOR
+
+module fs(d,br,a,b,cin);
+  input a,b,cin;
+  output d,br;
+  assign d=a^b^cin;
+  assign br=~a&(b^cin)|(b&cin);
+endmodule
+
+module fs4(d,br,a,b,cin);
+  input[3:0] a,b;
+  input cin;
+  output[3:0] d;
+  output br;
+  fs x1(d[0],br0,a[0],b[0],cin);
+  fs x2(d[1],br1,a[1],b[1],br0);
+  fs x3(d[2],br2,a[2],b[2],br1);
+  fs x4(d[3],br,a[3],b[3],br2);
+endmodule
+
+module fs16(d,br,a,b,cin);
+  input[15:0] a,b;
+  input cin;
+  output[15:0] d;
+  output br;
+  wire br3,br7,br11;
+  fs4 x5(d[3:0],br3,a[3:0],b[3:0],cin);
+  fs4 x6(d[7:4],br7,a[7:4],b[7:4],br3);
+  fs4 x7(d[11:8],br11,a[11:8],b[11:8],br7);
+  fs4 x8(d[15:12],br,a[15:12],b[15:12],br11);
+endmodule
+
+module fs64(d,br,a,b,cin);
+  input[63:0] a,b;
+  input cin;
+  output[63:0] d;
+  output br;
+  wire br15,br31,br47;
+  fs16 x9(d[15:0],br15,a[15:0],b[15:0],cin);
+  fs16 x10(d[31:16],br31,a[31:16],b[31:16],br15);
+  fs16 x11(d[47:32],br47,a[47:32],b[47:32],br31);
+  fs16 x12(d[63:48],br,a[63:48],b[63:48],br47);
+endmodule
+
+
+#TESTBENCH
+
+module tb_subtractor;
+  reg [63:0] a;
+  reg [63:0] b;
+  reg cin;
+  wire [63:0] d;
+  wire br;
+  fs64 a1(.a(a),
+  .b(b),
+  .cin(cin),
+  .d(d),
+  .br(br));
+  initial begin
+  a = 0;
+  b = 1;
+  cin = 1;
+end
+endmodule
