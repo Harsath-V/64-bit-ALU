@@ -40,10 +40,3 @@ module fs64(d,br,a,b,cin);
   fs16 x11(d[47:32],br47,a[47:32],b[47:32],br31);
   fs16 x12(d[63:48],br,a[63:48],b[63:48],br47);
 endmodule
-
-
-
-  b = 1;
-  cin = 1;
-end
-endmodule
