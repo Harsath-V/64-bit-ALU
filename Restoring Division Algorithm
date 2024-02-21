@@ -31,30 +31,3 @@ module bm(y,a,b);
        end       
 endmodule
 
-module tb_bm;
-    // Inputs
-    reg [64:0] a;
-    reg [64:0] b;
-    // Outputs
-    wire [129:0] y;
-    // Instantiate the Unit Under Test (UUT)
-    bm uut (
-        .a(a), 
-        .b(b), 
-        .y(y)
-    );
-    initial begin
-        // Initialize Inputs
-        a = 0;
-        b = 0;
-
-        // Wait 100 ns for global reset to finish
-        #100;
-        a=1048576;
-        b=1048576;
-        // Add stimulus here
-    end
-endmodule
-          
-  
-
