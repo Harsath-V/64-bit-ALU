@@ -52,7 +52,3 @@ module cla64(sum,cout,a,b,cin);
   cla16 x8(sum[63:48],cout,a[63:48],b[63:48],c47);
 endmodule
   
-b = 170;
-cin = 0;
-end
-endmodule
